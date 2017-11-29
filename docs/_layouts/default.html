@@ -18,8 +18,8 @@
 
 			<h1 style="text-align: center">
 				<a href="{{ site.github.url }}">
+					<img src="images/icon.png" style="width:64px;" /><br/>
 					{{ site.title | default: site.github.repository_name }}<br/>
-					<img src="images/icon.png" style="width:64px;" />
 				</a>
 			</h1>
 			
@@ -33,11 +33,10 @@
 			</p>
 
 			<h3>Documentation</h3>
+			<div class="sidebar">
 			{% include Sidebar.html %}
+			</div>
 
-<!--
-			<p class="view"><a href="{{ site.github.repository_url }}">View the Project</a></p>
--->
 		</header>
 		<section>
 
@@ -45,8 +44,7 @@
 
 		</section>
 		<footer>
-				<p><a href="https://airnativeextensions.com">airnativeextensions</a> by <a href="http://distriqt.com">distriqt //</a>
-				<p><small>Hosted on GitHub Pages</small></p>
+				<p><a href="https://airnativeextensions.com">airnativeextensions</a> <br/>by <a href="http://distriqt.com">distriqt //</a>
 		</footer>
 	</div>
 	<script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>

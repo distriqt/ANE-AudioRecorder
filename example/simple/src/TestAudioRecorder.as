@@ -151,7 +151,6 @@ package
 				
 				var options:AudioRecorderOptions = new AudioRecorderOptions();
 				options.filename = file.nativePath;
-				options.audioEncoding = AudioEncoder.VORBIS;
 				
 				AudioRecorder.service.start( options );
 			}

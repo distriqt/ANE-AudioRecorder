@@ -109,6 +109,8 @@ package com.distriqt.test.audiorecorder
 			
 			addAction( "Play :Playback", _tests.play );
 			
+			addAction( "Init :MediaPlayer", _tests.mediaPlayer_init );
+			addAction( "Play :MediaPlayer", _tests.mediaPlayer_play );
 			
 			addChild( _text );
 			for each (var button:Button in _buttons)

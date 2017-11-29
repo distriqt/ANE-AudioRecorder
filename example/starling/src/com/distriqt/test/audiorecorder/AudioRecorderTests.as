@@ -18,7 +18,11 @@ package com.distriqt.test.audiorecorder
 	import com.distriqt.extension.audiorecorder.AudioRecorder;
 	import com.distriqt.extension.audiorecorder.AudioRecorderOptions;
 	import com.distriqt.extension.audiorecorder.AuthorisationStatus;
+	import com.distriqt.extension.audiorecorder.OutputFormat;
 	import com.distriqt.extension.audiorecorder.events.AudioRecorderEvent;
+	import com.distriqt.extension.audiorecorder.events.AuthorisationEvent;
+	import com.distriqt.extension.mediaplayer.MediaPlayer;
+	import com.distriqt.extension.mediaplayer.events.MediaPlayerEvent;
 	
 	import flash.display.Bitmap;
 	import flash.events.Event;
@@ -68,6 +72,11 @@ package com.distriqt.test.audiorecorder
 				if (AudioRecorder.isSupported)
 				{
 					log( "AudioRecorder Version:   " + AudioRecorder.service.version );
+
+					AudioRecorder.service.addEventListener( AudioRecorderEvent.START, audioRecorderEventHandler );
+					AudioRecorder.service.addEventListener( AudioRecorderEvent.COMPLETE, audioRecorderEventHandler );
+					AudioRecorder.service.addEventListener( AudioRecorderEvent.PROGRESS, audioRecorderEventHandler );
+					
 				}
 				
 			}
@@ -97,6 +106,7 @@ package com.distriqt.test.audiorecorder
 				
 				case AuthorisationStatus.SHOULD_EXPLAIN:
 				case AuthorisationStatus.NOT_DETERMINED:
+					AudioRecorder.service.addEventListener( AuthorisationEvent.CHANGED, authChangedHandler );
 					AudioRecorder.service.requestAuthorisation();
 					break;
 				
@@ -105,6 +115,11 @@ package com.distriqt.test.audiorecorder
 				case AuthorisationStatus.UNKNOWN:
 					log( "denied or restricted" );
 			}
+		}
+		
+		private function authChangedHandler( event:AuthorisationEvent ):void
+		{
+			log( "authChangedHandler( " + event.status + " )" );
 		}
 		
 		
@@ -118,13 +133,8 @@ package com.distriqt.test.audiorecorder
 		{
 			if (AudioRecorder.service.hasAuthorisation())
 			{
-				AudioRecorder.service.addEventListener( AudioRecorderEvent.START, audioRecorderEventHandler );
-				AudioRecorder.service.addEventListener( AudioRecorderEvent.COMPLETE, audioRecorderEventHandler );
-				AudioRecorder.service.addEventListener( AudioRecorderEvent.PROGRESS, audioRecorderEventHandler );
-				
 				var options:AudioRecorderOptions = new AudioRecorderOptions();
 				options.filename = _file.nativePath;
-				options.audioEncoding = AudioEncoder.AAC;
 				
 				var success:Boolean = AudioRecorder.service.start( options );
 			
@@ -144,9 +154,9 @@ package com.distriqt.test.audiorecorder
 				var success:Boolean = AudioRecorder.service.stop();
 				log("stop(): " + success );
 				
-				AudioRecorder.service.removeEventListener( AudioRecorderEvent.START, audioRecorderEventHandler );
-				AudioRecorder.service.removeEventListener( AudioRecorderEvent.COMPLETE, audioRecorderEventHandler );
-				AudioRecorder.service.removeEventListener( AudioRecorderEvent.PROGRESS, audioRecorderEventHandler );
+//				AudioRecorder.service.removeEventListener( AudioRecorderEvent.START, audioRecorderEventHandler );
+//				AudioRecorder.service.removeEventListener( AudioRecorderEvent.COMPLETE, audioRecorderEventHandler );
+//				AudioRecorder.service.removeEventListener( AudioRecorderEvent.PROGRESS, audioRecorderEventHandler );
 			}
 			else
 			{
@@ -171,22 +181,24 @@ package com.distriqt.test.audiorecorder
 		
 		public function play():void
 		{
-			log("play()");
-
+			log( "play()" );
+			
 			if (_file.exists)
 			{
 				log( "\tnativePath: " + _file.nativePath );
 				log( "\turl:  " + _file.url );
 				log( "\tsize: " + _file.size );
-
+				
 				if (_nc == null)
 				{
 					_nc = new NetConnection();
-					_nc.connect(null);
+					_nc.connect( null );
 				}
 				_ns = new NetStream( _nc );
+				_ns.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 				_ns.client = new Object();
-				_ns.play( "file://"+_file.nativePath );
+				_ns.play( "file://" + _file.nativePath );
+//				_ns.play( _file.url );
 			}
 			else
 			{
@@ -195,6 +207,54 @@ package com.distriqt.test.audiorecorder
 			
 		}
 		
+		private function netStatusHandler( event:NetStatusEvent ):void
+		{
+			log( "netStatusHandler( " + event.info.code + " )");
+		}
 		
+		
+		
+		////////////////////////////////////////////////////////
+		//	MEDIA PLAYER
+		//
+		
+		public function mediaPlayer_init():void
+		{
+			log( "mediaPlayer_init()" );
+			try
+			{
+				MediaPlayer.init( "8e1efda636a2e86d097275007b9e913e76c310b1djibhbwjpeiUcJc0ttGaZyYKI13lCb/Uo3AWMwVSvUN2DrgjAoyBDc5h1+LHsaxZAXL8WC5FMHjz8Hpw6bKsUJAwk1nsKUqoJSuko76yLRzSQSZby32Vi2uq7Jt3dyOzNhYY3cRZ1ViOsJFhUVqRdwPNyDnAebMPtfkTBe+w9SJMzSOKxolOG79Mm55bVHeYrflk8gyfnSRAvXQV5Az2Ce9At0OuCphcJyRjZRNUjsxQVp9jbI6Zy7FTro1YhByZ+peqtP8Ms47QQcwKUmZNt2cq7AeJLlZPibmGQiEWTXzr8Ab3C37ero+iAWeBWkjEWIC/G7RGvvHT5g1pOrBvhA==" );
+			}
+			catch (e:Error)
+			{
+			}
+		}
+		
+		
+		public function mediaPlayer_play():void
+		{
+			log( "mediaPlayer_play()" );
+			if (_file.exists)
+			{
+				log( "\tnativePath: " + _file.nativePath );
+				log( "\turl:  " + _file.url );
+				log( "\tsize: " + _file.size );
+				
+				MediaPlayer.service.createPlayer( _file.nativePath, 0, 0, 320, 100, true );
+				MediaPlayer.service.addEventListener( MediaPlayerEvent.COMPLETE, mediaPlayer_completeHandler );
+			}
+			else
+			{
+				log( "ERROR: file doesn't exist" );
+			}
+		}
+		
+		private function mediaPlayer_completeHandler( event:MediaPlayerEvent ):void
+		{
+			MediaPlayer.service.removePlayer();
+		}
+		
+	
 	}
+	
 }
