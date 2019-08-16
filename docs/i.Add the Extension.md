@@ -13,7 +13,8 @@ The Core ANE is required by this ANE. You must include and package this extensio
 The Core ANE doesn't provide any functionality in itself but provides support libraries and frameworks used by our extensions.
 It also includes some centralised code for some common actions that can cause issues if they are implemented in each individual extension.
 
-You can access this extension here: https://github.com/distriqt/ANE-Core.
+You can access this extension here: [https://github.com/distriqt/ANE-Core](https://github.com/distriqt/ANE-Core).
+
 
 
 ### Android Support ANE
@@ -31,7 +32,26 @@ This ANE requires the following Android Support extensions:
 
 - [com.distriqt.androidsupport.V4.ane](https://github.com/distriqt/ANE-AndroidSupport/raw/master/lib/com.distriqt.androidsupport.V4.ane)
 
-You can access these extensions here: https://github.com/distriqt/ANE-AndroidSupport.
+You can access these extensions here: [https://github.com/distriqt/ANE-AndroidSupport](https://github.com/distriqt/ANE-AndroidSupport).
+
+>
+> **Note:** The Google Play Services and Android Support ANEs are only **required** on Android devices. 
+> There is no problem packaging these ANEs with all platforms as there are default implementations available which will allow your code to package without errors 
+> however if you are only building an iOS application feel free to remove the Google Play Services ANEs from your application.
+>
+
+
+## Extension IDs
+
+The following should be added to your `extensions` node in your application descriptor to identify all the required ANEs in your application:
+
+```xml
+<extensions>
+    <extensionID>com.distriqt.AudioRecorder</extensionID>
+    <extensionID>com.distriqt.Core</extensionID>
+    <extensionID>com.distriqt.androidsupport.V4</extensionID>
+</extensions>
+```
 
 
 

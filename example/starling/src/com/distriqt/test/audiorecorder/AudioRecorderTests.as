@@ -221,13 +221,6 @@ package com.distriqt.test.audiorecorder
 		public function mediaPlayer_init():void
 		{
 			log( "mediaPlayer_init()" );
-			try
-			{
-				MediaPlayer.init( "8e1efda636a2e86d097275007b9e913e76c310b1djibhbwjpeiUcJc0ttGaZyYKI13lCb/Uo3AWMwVSvUN2DrgjAoyBDc5h1+LHsaxZAXL8WC5FMHjz8Hpw6bKsUJAwk1nsKUqoJSuko76yLRzSQSZby32Vi2uq7Jt3dyOzNhYY3cRZ1ViOsJFhUVqRdwPNyDnAebMPtfkTBe+w9SJMzSOKxolOG79Mm55bVHeYrflk8gyfnSRAvXQV5Az2Ce9At0OuCphcJyRjZRNUjsxQVp9jbI6Zy7FTro1YhByZ+peqtP8Ms47QQcwKUmZNt2cq7AeJLlZPibmGQiEWTXzr8Ab3C37ero+iAWeBWkjEWIC/G7RGvvHT5g1pOrBvhA==" );
-			}
-			catch (e:Error)
-			{
-			}
 		}
 		
 		
@@ -248,6 +241,7 @@ package com.distriqt.test.audiorecorder
 				log( "ERROR: file doesn't exist" );
 			}
 		}
+		
 		
 		private function mediaPlayer_completeHandler( event:MediaPlayerEvent ):void
 		{

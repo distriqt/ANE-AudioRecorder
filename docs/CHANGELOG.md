@@ -1,5 +1,14 @@
 
 
+###### 2019.08.16 [v2.0.002]
+
+```
+Android 64bit support (resolves #7)
+Fixed optional permission requests 
+Updated minimum iOS version to 9.0
+```
+
+
 ###### 2017.11.29 [v1.2.044]
 
 iOS implementation (#1)
