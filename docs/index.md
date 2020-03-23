@@ -18,7 +18,35 @@ The simple API allows you to quickly integrate audio recording in your AIR appli
 - Sample project code and ASDocs reference
 
 
-This Wiki forms the best source of detailed documentation for the extension along with 
-the [asdocs](https://distriqt.github.io/ANE-AudioRecorder/asdocs). 
+
+## Documentation
+
+Latest documentation can be found in the [wiki](https://github.com/distriqt/ANE-AudioRecorder/wiki)
+
+Quick Example: 
+
+```actionscript
+var file:File = File.applicationStorageDirectory.resolvePath( "recording.m4a" );
+
+var options:AudioRecorderOptions = new AudioRecorderOptions();
+options.filename = file.nativePath;
+options.audioEncoding = AudioEncoder.AAC;
+
+AudioRecorder.service.start( options );
+```
+
+More information here: 
+
+[com.distriqt.AudioRecorder](https://airnativeextensions.com/extension/com.distriqt.AudioRecorder)
+
+
+## License
+
+You can purchase a license for using this extension:
+
+[airnativeextensions.com](https://airnativeextensions.com/)
+
+distriqt retains all copyright.
+
 
 ![](images/promo.png)

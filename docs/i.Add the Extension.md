@@ -4,9 +4,17 @@ First step is always to add the extension to your development environment.
 To do this use the tutorial located [here](http://airnativeextensions.com/knowledgebase/tutorial/1).
 
 
-## Required ANEs
 
-### Core ANE
+## Dependencies
+
+Many of our extensions use some common libraries, for example, the Android Support libraries.
+
+We have to separate these libraries into separate extensions in order to avoid multiple versions of the libraries being included in your application and causing packaging conflicts. This means that you need to include some additional extensions in your application along with the main extension file.
+
+You will add these extensions as you do with any other extension, and you need to ensure it is packaged with your application.
+
+
+### Core 
 
 The Core ANE is required by this ANE. You must include and package this extension in your application.
 
@@ -16,28 +24,28 @@ It also includes some centralised code for some common actions that can cause is
 You can access this extension here: [https://github.com/distriqt/ANE-Core](https://github.com/distriqt/ANE-Core).
 
 
+### Android Support
 
-### Android Support ANE
+The Android Support libraries encompass the Android Support, Android X and common Google libraries. 
 
-Due to several of our ANE's using the Android Support library the library has been separated 
-into a separate ANE allowing you to avoid conflicts and duplicate definitions.
-This means that you need to include the some of the android support native extensions in 
-your application along with this extension. 
+These libraries are specific to Android. There are no issues including these on all platforms, they are just **required** for Android.
 
-You will add these extensions as you do with any other ANE, and you need to ensure it is 
-packaged with your application. There is no problems including this on all platforms, 
-they are just **required** on Android.
+This extension requires the following extensions:
 
-This ANE requires the following Android Support extensions:
-
-- [com.distriqt.androidsupport.V4.ane](https://github.com/distriqt/ANE-AndroidSupport/raw/master/lib/com.distriqt.androidsupport.V4.ane)
+- [androidx.core.ane](https://github.com/distriqt/ANE-AndroidSupport/raw/master/lib/androidx.core.ane)
 
 You can access these extensions here: [https://github.com/distriqt/ANE-AndroidSupport](https://github.com/distriqt/ANE-AndroidSupport).
 
+
+>
+> **Note**: if you have been using the older `com.distriqt.androidsupport.*` (Android Support) extensions you should remove these extensions and replace it with the `androidx` extensions listed above. This is the new version of the android support libraries and moving forward all our extensions will require AndroidX.
+>
+
+
+
 >
 > **Note:** The Google Play Services and Android Support ANEs are only **required** on Android devices. 
-> There is no problem packaging these ANEs with all platforms as there are default implementations available which will allow your code to package without errors 
-> however if you are only building an iOS application feel free to remove the Google Play Services ANEs from your application.
+> There are no issues packaging these extensions with all platforms as there are default implementations available which will allow your code to package without errors however if you are only building an iOS application feel free to remove the Google Play Services and Android Support ANEs from your application.
 >
 
 
@@ -47,17 +55,21 @@ The following should be added to your `extensions` node in your application desc
 
 ```xml
 <extensions>
-    <extensionID>com.distriqt.AudioRecorder</extensionID>
-    <extensionID>com.distriqt.Core</extensionID>
-    <extensionID>com.distriqt.androidsupport.V4</extensionID>
+	<extensionID>com.distriqt.AudioRecorder</extensionID>
+	<extensionID>com.distriqt.Core</extensionID>
+	
+	<extensionID>androidx.core</extensionID>
 </extensions>
 ```
 
 
 
-## Android Manifest Additions
+## Android 
 
-The AudioRecorder ANE requires a few additions to the manifest to be able to 
+
+### Manifest Additions
+
+The AudioRecorder extension requires a few additions to the manifest to be able to 
 start certain activities and get access to the users microphone.
 
 You should add the listing below to your manifest, take particular attention to 
@@ -81,3 +93,5 @@ request permissions at runtime.
 
 </manifest>
 ```
+
+
