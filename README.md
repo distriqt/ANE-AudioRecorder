@@ -20,7 +20,7 @@ The simple API allows you to quickly integrate audio recording in your AIR appli
 
 ## Documentation
 
-Latest documentation can be found in the [wiki](https://github.com/distriqt/ANE-AudioRecorder/wiki)
+Latest documentation can be found in the [documentation site](https://docs.airnativeextensions.com/docs/audiorecorder)
 
 Quick Example: 
 
