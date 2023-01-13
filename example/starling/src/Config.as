@@ -10,7 +10,7 @@
  *
  * @file   		Config.as
  * @brief  		
- * @author 		"Michael Archbold (ma&#64;distriqt.com)"
+ * @author 		Michael Archbold (https://github.com/marchbold)
  * @created		07/10/2014
  * @copyright	http://distriqt.com/copyright/license.txt
  */

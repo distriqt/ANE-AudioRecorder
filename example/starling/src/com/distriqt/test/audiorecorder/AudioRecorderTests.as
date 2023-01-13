@@ -8,7 +8,7 @@
  *                           \/ 
  * http://distriqt.com
  *
- * @author 		"Michael Archbold (ma&#64;distriqt.com)"
+ * @author 		Michael Archbold (https://github.com/marchbold)
  * @created		08/01/2016
  * @copyright	http://distriqt.com/copyright/license.txt
  */

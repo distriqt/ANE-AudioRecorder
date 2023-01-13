@@ -10,7 +10,7 @@
  *
  * @file   		ILogger.as
  * @brief  		
- * @author 		"Michael Archbold (ma&#64;distriqt.com)"
+ * @author 		Michael Archbold (https://github.com/marchbold)
  * @created		26/03/2015
  * @updated		$Date:$
  * @copyright	http://distriqt.com/copyright/license.txt
@@ -18,7 +18,7 @@
 package com.distriqt.test.audiorecorder
 {
 	/**
-	 * @author 	"Michael Archbold (ma&#64;distriqt.com)"
+	 * @author 	Michael Archbold (https://github.com/marchbold)
 	 */
 	public interface ILogger
 	{
